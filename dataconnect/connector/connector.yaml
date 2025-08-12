@@ -1,0 +1,15 @@
+connectorId: "default"
+generate:
+  javascriptSdk:
+    outputDir: "../../src/lib/dataconnect-generated"
+    package: "@firebasegen/todo-connector"
+    packageJsonDir: "../../"
+#   swiftSdk:
+#     outputDir: <Path where you want the generated SDK to be written to, relative to this file>
+#     package: DefaultConnector
+#   kotlinSdk:
+#     outputDir: <Path where you want the generated SDK to be written to, relative to this file>
+#     package: connectors.default
+#   dartSdk:
+#     outputDir: <Path where you want the generated SDK to be written to, relative to this file>
+#     package: default_connector

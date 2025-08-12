@@ -1,0 +1,25 @@
+# Todo App Schema
+
+# User table is keyed by Firebase Auth UID
+type User @table {
+  # `@default(expr: "auth.uid")` sets it to Firebase Auth UID during insert and upsert
+  id: String! @default(expr: "auth.uid")
+  email: String
+  displayName: String
+  photoUrl: String
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+# Todo table with UUID primary key
+type Todo @table {
+  # UUID primary key auto-generated
+  id: UUID! @default(expr: "uuidV4()")
+  text: String!
+  completed: Boolean! @default(expr: "false")
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+  # Reference to the user who owns this todo
+  user: User!
+  # The user field adds the following foreign key field
+  userId: String!
+}

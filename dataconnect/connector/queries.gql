@@ -1,0 +1,26 @@
+# Todo App Queries
+
+# Get all todos for the current authenticated user
+query GetMyTodos @auth(level: USER) {
+  todos(where: {userId: {eq_expr: "auth.uid"}}, orderBy: [{createdAt: DESC}]) {
+    id
+    text
+    completed
+    createdAt
+    updatedAt
+  }
+}
+
+# Get a specific todo by ID (must belong to current user)
+query GetTodoById($id: UUID!) @auth(level: USER) {
+  todo(id: $id) {
+    id
+    text
+    completed
+    createdAt
+    updatedAt
+    user {
+      id
+    }
+  }
+}

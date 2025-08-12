@@ -1,0 +1,49 @@
+# Todo App Mutations
+
+# Create a new user profile (auto-upsert on first login)
+mutation UpsertUser($email: String, $displayName: String, $photoUrl: String) @auth(level: USER) {
+  # The "auth.uid" server value ensures that users can only register their own user
+  user_upsert(data: { 
+    id_expr: "auth.uid", 
+    email: $email, 
+    displayName: $displayName, 
+    photoUrl: $photoUrl 
+  })
+}
+
+# Add a new todo for the current authenticated user
+mutation AddTodo($text: String!) @auth(level: USER) {
+  todo_insert(data: {
+    userId_expr: "auth.uid",
+    text: $text
+    # completed defaults to false in the schema
+    # createdAt and updatedAt default to request.time in the schema
+  })
+}
+
+# Toggle the completed status of a todo
+mutation ToggleTodoCompletion($id: UUID!, $completed: Boolean!) @auth(level: USER) {
+  todo_update(
+    key: { id: $id }, 
+    data: { 
+      completed: $completed,
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+# Update the text of a todo
+mutation UpdateTodoText($id: UUID!, $text: String!) @auth(level: USER) {
+  todo_update(
+    key: { id: $id },
+    data: { 
+      text: $text,
+      updatedAt_expr: "request.time"
+    }
+  )
+}
+
+# Delete a todo (only owner can delete)
+mutation DeleteTodo($id: UUID!) @auth(level: USER) {
+  todo_delete(key: { id: $id })
+}
