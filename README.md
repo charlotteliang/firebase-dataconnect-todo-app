@@ -1,6 +1,8 @@
 # Firebase Data Connect Todo App
 
-A modern React-based todo application showcasing Firebase Data Connect integration with user authentication and real-time data synchronization.
+A modern React-based todo application showcasing Firebase Data Connect integration with user authentication, real-time data synchronization, and an innovative SQL Editor.
+
+🌐 **Live Demo**: [https://todo-app-dataconnect-2024.web.app](https://todo-app-dataconnect-2024.web.app)
 
 ## Features
 
@@ -8,8 +10,11 @@ A modern React-based todo application showcasing Firebase Data Connect integrati
 - 📝 **Todo Management** - Create, read, update, and delete todos
 - 🔄 **Real-time Sync** - Data updates in real-time across devices
 - ⚡ **Firebase Data Connect** - Modern PostgreSQL-based backend with GraphQL
+- 🗂️ **Multiple Views** - Card view, table view, and SQL editor
+- 🔍 **SQL Editor** - Query your data using familiar SQL syntax (translates to GraphQL)
 - 🎨 **Modern UI** - Clean, responsive design with intuitive interactions
 - 🔒 **Secure Configuration** - Environment variables for API keys
+- 📱 **Mobile Responsive** - Works seamlessly on all devices
 
 ## Technology Stack
 
@@ -131,8 +136,10 @@ Before you begin, ensure you have:
 │   ├── components/          # React components
 │   │   ├── AddTodo.tsx     # Todo creation component
 │   │   ├── Login.tsx       # Authentication component
+│   │   ├── SQLEditor.tsx   # SQL Editor component
 │   │   ├── TodoItem.tsx    # Individual todo item
-│   │   └── TodoList.tsx    # Todo list container
+│   │   ├── TodoList.tsx    # Todo list container
+│   │   └── TodoTableView.tsx # Table view component
 │   ├── config/
 │   │   └── firebase.ts     # Firebase configuration
 │   ├── contexts/
@@ -152,11 +159,21 @@ Before you begin, ensure you have:
 The app uses a simple todo schema:
 
 ```graphql
-type Todo @table {
-  id: UUID! @default(expr: "uuidv4()")
-  title: String!
-  completed: Boolean! @default(value: false)
+type User @table {
+  id: String! @default(expr: "auth.uid")
+  email: String
+  displayName: String
+  photoUrl: String
   createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Todo @table {
+  id: UUID! @default(expr: "uuidV4()")
+  text: String!
+  completed: Boolean! @default(expr: "false")
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+  user: User!
   userId: String!
 }
 ```
@@ -202,10 +219,28 @@ Starts local Firebase emulators for development
 
 ### Data Operations
 
-- **Create Todo**: Add new todos with title and completion status
+- **Create Todo**: Add new todos with text and completion status
 - **Read Todos**: Fetch all todos for authenticated user
-- **Update Todo**: Toggle completion status or edit title
+- **Update Todo**: Toggle completion status or edit text
 - **Delete Todo**: Remove todos from the database
+- **SQL Queries**: Query data using familiar SQL syntax in the SQL Editor
+
+### SQL Editor
+
+The SQL Editor allows you to query your todo data using familiar SQL syntax that gets automatically translated to GraphQL queries:
+
+**Supported SQL Operations:**
+- `SELECT * FROM todos` - Get all your todos
+- `SELECT id, text, completed FROM todos WHERE completed = true` - Filter todos
+- `SELECT completed, COUNT(*) as count FROM todos GROUP BY completed` - Aggregate queries
+- `SELECT * FROM todos WHERE id = "your-todo-id"` - Query specific todo
+
+**Features:**
+- Real-time query execution
+- GraphQL query translation display
+- Query history with timestamps
+- Pre-built example queries
+- Formatted result tables
 
 ## Deployment
 

@@ -5,6 +5,8 @@ import * as dataConnectService from './services/dataConnectGenerated';
 import { logout } from './services/auth';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import TodoTableView from './components/TodoTableView';
+import SQLEditor from './components/SQLEditor';
 import Login from './components/Login';
 import './App.css';
 
@@ -12,6 +14,7 @@ const TodoApp: React.FC = () => {
   const { user, loading } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+  const [viewMode, setViewMode] = useState<'cards' | 'table' | 'sql'>('cards');
   const [error, setError] = useState<string>('');
   const [appLoading, setAppLoading] = useState(false);
 
@@ -176,34 +179,59 @@ const TodoApp: React.FC = () => {
           </div>
         )}
 
-        <AddTodo onAdd={addTodo} />
+        {viewMode !== 'sql' && <AddTodo onAdd={addTodo} />}
 
-        <div className="filter-controls">
-          <button
-            className={filter === 'all' ? 'active' : ''}
-            onClick={() => setFilter('all')}
-          >
-            📋 All ({todos.length})
-          </button>
-          <button
-            className={filter === 'active' ? 'active' : ''}
-            onClick={() => setFilter('active')}
-          >
-            🔥 Active ({activeTodoCount})
-          </button>
-          <button
-            className={filter === 'completed' ? 'active' : ''}
-            onClick={() => setFilter('completed')}
-          >
-            ✅ Completed ({completedTodoCount})
-          </button>
+        <div className="view-controls">
+          <div className="view-tabs">
+            <button
+              className={viewMode === 'cards' ? 'active' : ''}
+              onClick={() => setViewMode('cards')}
+            >
+              Card View
+            </button>
+            <button
+              className={viewMode === 'table' ? 'active' : ''}
+              onClick={() => setViewMode('table')}
+            >
+              Table View
+            </button>
+            <button
+              className={viewMode === 'sql' ? 'active' : ''}
+              onClick={() => setViewMode('sql')}
+            >
+              SQL Editor
+            </button>
+          </div>
         </div>
+
+        {viewMode === 'cards' && (
+          <div className="filter-controls">
+            <button
+              className={filter === 'all' ? 'active' : ''}
+              onClick={() => setFilter('all')}
+            >
+              📋 All ({todos.length})
+            </button>
+            <button
+              className={filter === 'active' ? 'active' : ''}
+              onClick={() => setFilter('active')}
+            >
+              🔥 Active ({activeTodoCount})
+            </button>
+            <button
+              className={filter === 'completed' ? 'active' : ''}
+              onClick={() => setFilter('completed')}
+            >
+              ✅ Completed ({completedTodoCount})
+            </button>
+          </div>
+        )}
 
         {appLoading ? (
           <div className="loading-container">
             <p>⏳ Loading todos...</p>
           </div>
-        ) : (
+        ) : viewMode === 'cards' ? (
           <TodoList
             todos={filteredTodos}
             onToggle={toggleTodo}
@@ -212,6 +240,15 @@ const TodoApp: React.FC = () => {
             filter={filter}
             allTodos={todos}
           />
+        ) : viewMode === 'table' ? (
+          <TodoTableView
+            todos={todos}
+            onToggle={toggleTodo}
+            onDelete={deleteTodo}
+            onEdit={editTodo}
+          />
+        ) : (
+          <SQLEditor onError={setError} />
         )}
 
         {todos.length > 0 && !appLoading && (

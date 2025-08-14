@@ -7,7 +7,7 @@ import {
   updateTodoText as updateTodoMutation,
   deleteTodo as deleteTodoMutation,
   upsertUser as upsertUserMutation,
-  GetMyTodosData,
+
   AddTodoVariables,
   ToggleTodoCompletionVariables,
   UpdateTodoTextVariables,

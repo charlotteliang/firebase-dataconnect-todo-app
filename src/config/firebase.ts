@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { connectDataConnectEmulator, getDataConnect } from 'firebase/data-connect';
+import { getDataConnect } from 'firebase/data-connect';
 import { connectorConfig } from '../lib/dataconnect-generated';
 
 // Firebase configuration using environment variables
