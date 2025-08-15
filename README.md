@@ -36,82 +36,77 @@ Before you begin, ensure you have:
 
 ## AI Prompts
 
-### Generate Todo App with Firebase Data Connect
-
-Here's a natural language prompt you can use with AI assistants to generate a similar todo application:
-
-"I want to create a modern React todo application with Firebase Data Connect integration. The app should have user authentication, real-time data synchronization, and multiple view options including a card view, table view, and an SQL editor. 
-
-The app should include:
-- User authentication with Firebase Auth (email/password)
-- Todo CRUD operations (create, read, update, delete)
-- Real-time data updates across devices
-- Multiple UI views: card layout, table view, and SQL query interface
-- Firebase Data Connect backend with PostgreSQL and GraphQL
-- TypeScript for type safety
-- Modern, responsive UI design
-- SQL Editor that translates SQL queries to GraphQL
-- Environment variable configuration for security
-
-The database schema should have Users and Todos tables with proper relationships. Users should be able to create, edit, complete, and delete their own todos. The SQL Editor should allow users to query their data using familiar SQL syntax that gets translated to GraphQL queries.
-
-Please include proper error handling, loading states, and a clean project structure with separate components for different features."
-
 ### Setup Firebase Data Connect
 
 Here's a step-by-step approach for setting up Firebase Data Connect with AI assistants:
 
-**STEP 1: Prototype**
+## Step-by-Step Setup
+
+### Step 1: Prototype
 Create an empty folder and open with your AI assistant, then ask:
 
 ```
-Build me a todo app
+Make me a todo app
 ```
 
-**STEP 2: Firebase Initialization**
+### Step 2: Firebase Initialization
 Ask your AI assistant:
 
 ```
-I want to use Firebase Data Connect for the database. Create a new Firebase project and a new Firebase web app on the Firebase Console, and connect to this app. Use environment variables for all Firebase configuration and never hard code API keys in the source code.
+I want to use Firebase Data Connect for the database. 
+Create a new Firebase project and a new Firebase web app on the Firebase Console, 
+and connect to this app. Use environment variables for all Firebase configuration 
+and never hard code API keys in the source code.
 ```
 
-You should see Firebase MCP server Tools triggered and your project and web app created on the console.
+You should see Firebase MCP server tools triggered and your project and web app created on the Firebase console.
 
-**STEP 3: Billing Upgrade**
+### Step 3: Billing Upgrade
 Go to the console and update your billing plan.
 
-**STEP 4: Schema and Operations**
-Your AI assistant should automatically create schema in your schema.gql file. If not, ask:
+### Step 4: Schema and Operations
+Your AI assistant should automatically create schema in your `schema.gql` file. If not, ask:
 
 ```
-Help me generate the schema for this app under schema.gql file and make sure to use MCP tool
+Help me generate the schema for this app under schema.gql file 
+and make sure to use MCP tool
 ```
 
-For accuracy, download the Firebase Data Connect VS Code Extension and open the Problems terminal (SHIFT + CMD + M). Then ask your AI assistant:
+If there's no error in the schema, query and mutation.gql files, AI assistant should be able to run Firebase deploy successfully, and if there's any error, you can download the Firebase Data Connect VS Code Extension and open the Problems terminal (Shift + Cmd + M) to show the lint errors. Then ask your AI assistant:
 
 ```
-Check out the syntax errors in Problems tab to ensure there's no Firebase Data Connect GraphQL syntax issues in mutation.gql and queries.gql? Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt
+Check out the syntax errors in Problems tab to ensure there's no Firebase Data Connect 
+GraphQL syntax issues in mutation.gql and queries.gql? Please use this doc as guidance 
+for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc 
+for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt
+```
+You can also ask your AI assistant:
+
+``` run firebase deploy --dry-run
 ```
 
-**STEP 5: Database Provision**
+It will compiles the graghQL locally and report any errors for AI assistant to fix. 
+
+### Step 5: Database Provision
 Once your AI assistant fixed all issues, ask:
 
 ```
 Now deploy Firebase Data Connect and use the generated SDK in the app
 ```
 
-Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL Pantheon console at https://console.cloud.google.com/sql/
+Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL console at https://console.cloud.google.com/sql/
 
-**STEP 6: Ensure Read and Write Works**
+### Step 6: Ensure Read and Write Works
 Ask your AI assistant:
 
 ```
-Now use the updated generated SDK to communicate with database so I can test the app
+Now use the updated generated SDK to communicate with database 
+so I can test the app
 ```
 
 Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
 
-**STEP 7: Authentication**
+### Step 7: Authentication
 Now that Firebase Data Connect is working, ask:
 
 ```
@@ -120,25 +115,27 @@ Build login page using Firebase Auth so users can access their own todo list
 
 Go to console and enable Email/Password and Google Sign-in.
 
-**STEP 8: Hosting**
+### Step 8: Hosting
 Ask your AI assistant:
 
 ```
-Can you setup Firebase Hosting and deploy the app to production 🚀? Make sure we hide all the API keys before deploy to GitHub
+Can you setup Firebase Hosting and deploy the app to production 🚀? 
+Make sure we hide all the API keys before deploy to GitHub
 ```
 
 If unsure which framework Firebase Hosting is asking, ask your AI assistant which framework is used in this app.
 
-**STEP 9: (Optional) Commit to GitHub**
+### Step 9: (Optional) Commit to GitHub
 Ask your AI assistant:
 
 ```
-Now create a new repo in GitHub and commit the code in, make sure you hide all the API keys
+Now create a new repo in GitHub and commit the code in, 
+make sure you hide all the API keys
 ```
 
 Your AI assistant can use GitHub CLI to set up a repo and commit the changes with a detailed README.
 
-**SQL Dashboard (Optional)**
+### SQL Dashboard (Optional)
 For admin users, you can build a separate SQL dashboard app using the Firebase Data Connect admin SDK. Ask your AI assistant to build a separate web app with table view and SQL editor for admin access to the Data Connect database.
 
 ### 📋 Manual Setup Alternative
