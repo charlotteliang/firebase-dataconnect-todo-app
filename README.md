@@ -34,77 +34,115 @@ Before you begin, ensure you have:
 - Firebase CLI installed (`npm install -g firebase-tools`)
 - Git installed
 
-## Firebase Setup
+## AI Prompts
 
-### 1. Create a Firebase Project
+### Generate Todo App with Firebase Data Connect
 
-1. Go to the [Firebase Console](https://console.firebase.google.com/)
-2. Click "Create a project"
-3. Enter project name (e.g., "my-todo-app")
-4. Enable Google Analytics (optional)
-5. Click "Create project"
+Here's a natural language prompt you can use with AI assistants to generate a similar todo application:
 
-### 2. Enable Firebase Services
+"I want to create a modern React todo application with Firebase Data Connect integration. The app should have user authentication, real-time data synchronization, and multiple view options including a card view, table view, and an SQL editor. 
 
-#### Enable Authentication
-1. In Firebase Console, go to "Authentication" → "Get started"
-2. Go to "Sign-in method" tab
-3. Enable "Email/Password" provider
-4. Click "Save"
+The app should include:
+- User authentication with Firebase Auth (email/password)
+- Todo CRUD operations (create, read, update, delete)
+- Real-time data updates across devices
+- Multiple UI views: card layout, table view, and SQL query interface
+- Firebase Data Connect backend with PostgreSQL and GraphQL
+- TypeScript for type safety
+- Modern, responsive UI design
+- SQL Editor that translates SQL queries to GraphQL
+- Environment variable configuration for security
 
-#### Enable Firebase Data Connect
-1. In Firebase Console, go to "Data Connect" in the left sidebar
-2. Click "Get started"
-3. Choose your preferred region (e.g., us-central1)
-4. Create a new Cloud SQL instance or use existing one
-5. Follow the setup wizard to configure your database
+The database schema should have Users and Todos tables with proper relationships. Users should be able to create, edit, complete, and delete their own todos. The SQL Editor should allow users to query their data using familiar SQL syntax that gets translated to GraphQL queries.
 
-### 3. Get Firebase Configuration
+Please include proper error handling, loading states, and a clean project structure with separate components for different features."
 
-1. In Firebase Console, go to Project Settings (gear icon)
-2. Scroll down to "Your apps" section
-3. Click "Add app" → Web app
-4. Register your app with a nickname
-5. Copy the Firebase config object
+### Setup Firebase Data Connect
 
-### 4. Configure Environment Variables
+Here's a step-by-step approach for setting up Firebase Data Connect with AI assistants:
 
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env.local
-   ```
+**STEP 1: Prototype**
+Create an empty folder and open with your AI assistant, then ask:
 
-2. Update `.env.local` with your Firebase configuration:
-   ```env
-   REACT_APP_FIREBASE_API_KEY=your_api_key_here
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-   REACT_APP_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-   REACT_APP_FIREBASE_APP_ID=your_app_id
-   ```
+```
+Build me a todo app
+```
 
-### 5. Deploy Firebase Data Connect Schema
+**STEP 2: Firebase Initialization**
+Ask your AI assistant:
 
-1. Install Firebase CLI if not already installed:
-   ```bash
-   npm install -g firebase-tools
-   ```
+```
+I want to use Firebase Data Connect for the database. Create a new Firebase project and a new Firebase web app on the Firebase Console, and connect to this app. Use environment variables for all Firebase configuration and never hard code API keys in the source code.
+```
 
-2. Login to Firebase:
-   ```bash
-   firebase login
-   ```
+You should see Firebase MCP server Tools triggered and your project and web app created on the console.
 
-3. Set your project:
-   ```bash
-   firebase use your_project_id
-   ```
+**STEP 3: Billing Upgrade**
+Go to the console and update your billing plan.
 
-4. Deploy the Data Connect schema and connectors:
-   ```bash
-   firebase deploy --only dataconnect
-   ```
+**STEP 4: Schema and Operations**
+Your AI assistant should automatically create schema in your schema.gql file. If not, ask:
+
+```
+Help me generate the schema for this app under schema.gql file and make sure to use MCP tool
+```
+
+For accuracy, download the Firebase Data Connect VS Code Extension and open the Problems terminal (SHIFT + CMD + M). Then ask your AI assistant:
+
+```
+Check out the syntax errors in Problems tab to ensure there's no Firebase Data Connect GraphQL syntax issues in mutation.gql and queries.gql? Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt
+```
+
+**STEP 5: Database Provision**
+Once your AI assistant fixed all issues, ask:
+
+```
+Now deploy Firebase Data Connect and use the generated SDK in the app
+```
+
+Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL Pantheon console at https://console.cloud.google.com/sql/
+
+**STEP 6: Ensure Read and Write Works**
+Ask your AI assistant:
+
+```
+Now use the updated generated SDK to communicate with database so I can test the app
+```
+
+Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
+
+**STEP 7: Authentication**
+Now that Firebase Data Connect is working, ask:
+
+```
+Build login page using Firebase Auth so users can access their own todo list
+```
+
+Go to console and enable Email/Password and Google Sign-in.
+
+**STEP 8: Hosting**
+Ask your AI assistant:
+
+```
+Can you setup Firebase Hosting and deploy the app to production 🚀? Make sure we hide all the API keys before deploy to GitHub
+```
+
+If unsure which framework Firebase Hosting is asking, ask your AI assistant which framework is used in this app.
+
+**STEP 9: (Optional) Commit to GitHub**
+Ask your AI assistant:
+
+```
+Now create a new repo in GitHub and commit the code in, make sure you hide all the API keys
+```
+
+Your AI assistant can use GitHub CLI to set up a repo and commit the changes with a detailed README.
+
+**SQL Dashboard (Optional)**
+For admin users, you can build a separate SQL dashboard app using the Firebase Data Connect admin SDK. Ask your AI assistant to build a separate web app with table view and SQL editor for admin access to the Data Connect database.
+
+### 📋 Manual Setup Alternative
+For traditional manual setup without AI assistance, see our detailed [Firebase Setup Guide](FIREBASE_SETUP.md).
 
 ## Installation & Setup
 
@@ -119,7 +157,7 @@ Before you begin, ensure you have:
    npm install
    ```
 
-3. **Set up environment variables** (follow Firebase Setup section above)
+3. **Set up environment variables** (see [Firebase Setup Guide](FIREBASE_SETUP.md))
 
 4. **Start the development server:**
    ```bash
@@ -197,20 +235,6 @@ Starts local Firebase emulators for development
 
 ## Development
 
-### Using Firebase Emulators (Recommended for Development)
-
-1. Start the Firebase emulators:
-   ```bash
-   firebase emulators:start
-   ```
-
-2. Update your firebase config to use emulators (uncomment emulator connection in `src/config/firebase.ts`)
-
-3. Start the React app:
-   ```bash
-   npm start
-   ```
-
 ### Authentication Flow
 
 1. Users must sign up/login with email and password
@@ -242,26 +266,6 @@ The SQL Editor allows you to query your todo data using familiar SQL syntax that
 - Pre-built example queries
 - Formatted result tables
 
-## Deployment
-
-### Deploy to Firebase Hosting
-
-1. Build the production app:
-   ```bash
-   npm run build
-   ```
-
-2. Deploy to Firebase Hosting:
-   ```bash
-   firebase deploy --only hosting
-   ```
-
-### Deploy Data Connect Schema
-
-```bash
-firebase deploy --only dataconnect
-```
-
 ## Security
 
 - ✅ API keys are secured using environment variables
@@ -269,25 +273,6 @@ firebase deploy --only dataconnect
 - ✅ User authentication required for all todo operations
 - ✅ Data access is scoped to authenticated users
 - ✅ Firebase Security Rules protect user data
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Environment Variables Not Loading**
-   - Ensure your `.env.local` file is in the project root
-   - Restart the development server after changing environment variables
-   - Verify all `REACT_APP_` prefixes are correct
-
-2. **Firebase Connection Errors**
-   - Check that all Firebase services are enabled in the console
-   - Verify your Firebase project ID and configuration
-   - Ensure Firebase CLI is logged in: `firebase login`
-
-3. **Data Connect Errors**
-   - Make sure the schema is deployed: `firebase deploy --only dataconnect`
-   - Check that Cloud SQL instance is running
-   - Verify the Data Connect service is properly configured
 
 ## Contributing
 
