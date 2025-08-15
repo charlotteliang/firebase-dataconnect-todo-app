@@ -82,7 +82,8 @@ for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tool
 ```
 You can also ask your AI assistant:
 
-``` run firebase deploy --dry-run
+```
+run firebase deploy --dry-run
 ```
 
 It will compiles the graghQL locally and report any errors for AI assistant to fix. 
