@@ -29,10 +29,17 @@ A modern React-based todo application showcasing Firebase Data Connect integrati
 
 Before you begin, ensure you have:
 
-- Node.js 16+ installed
 - A Google Cloud Platform account
-- Firebase CLI installed (`npm install -g firebase-tools`)
-- Git installed
+- Git installed (optional)
+
+### Setup Firebase MCP Server
+Ask your AI assistant:
+
+```
+Setup Firebase MCP server based on this doc: https://firebase.google.com/docs/cli/mcp-server#before-you-begin
+```
+
+This will automatically install Node.js and Firebase CLI if needed.
 
 ## AI Prompts
 
@@ -72,18 +79,14 @@ Help me generate the schema for this app under schema.gql file
 and make sure to use MCP tool
 ```
 
-If there's no error in the schema, query and mutation.gql files, AI assistant should be able to run Firebase deploy successfully, and if there's any error, you can download the Firebase Data Connect VS Code Extension and open the Problems terminal (Shift + Cmd + M) to show the lint errors. Then ask your AI assistant:
+If there's no error in the schema, query and mutation.gql files, AI assistant should be able to run Firebase deploy successfully, and if there's any error, you can ask your AI assistant:
 
 ```
-Check out the syntax errors in Problems tab to ensure there's no Firebase Data Connect 
-GraphQL syntax issues in mutation.gql and queries.gql? Please use this doc as guidance 
+run firebase deploy --dry-run.
+Debug any issues in  .gql files.
+Please use this doc as guidance 
 for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc 
-for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt
-```
-You can also ask your AI assistant:
-
-```
-run firebase deploy --dry-run
+for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
 ```
 
 It will compiles the graghQL locally and report any errors for AI assistant to fix. 
@@ -92,7 +95,7 @@ It will compiles the graghQL locally and report any errors for AI assistant to f
 Once your AI assistant fixed all issues, ask:
 
 ```
-Now deploy Firebase Data Connect and use the generated SDK in the app
+Now deploy Firebase Data Connect schema.
 ```
 
 Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL console at https://console.cloud.google.com/sql/
@@ -101,11 +104,19 @@ Make sure to acknowledge the changes in database in the CLI tool. Your AI assist
 Ask your AI assistant:
 
 ```
-Now use the updated generated SDK to communicate with database 
-so I can test the app
+Now desgin queries to communicate with database in query.gql and mutation.gql files and then
+generate SDKs and use them in the app.
 ```
 
 Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
+
+```
+Now deploy Firebase Data Connect operations.
+Debug any issues in  .gql files.
+Please use this doc as guidance 
+for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc 
+for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
+```
 
 ### Step 7: Authentication
 Now that Firebase Data Connect is working, ask:
