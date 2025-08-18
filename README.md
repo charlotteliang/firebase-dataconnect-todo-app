@@ -104,19 +104,24 @@ Make sure to acknowledge the changes in database in the CLI tool. Your AI assist
 Ask your AI assistant:
 
 ```
-Now desgin queries to communicate with database in query.gql and mutation.gql files and then
-generate SDKs and use them in the app.
+Now desgin queries to communicate with database in query.gql and mutation.gql files and
+make sure to use MCP server tool to do this
+Then generate SDKs and use them in the app.
+Once you are ready, deploy Firebase Data Connect operations.
+
+```
+
+If there's any errors blocking the deploy, ask your AI assistant:
+
+```
+run firebase deploy --dry-run.
+Debug any issues in  .gql files.
+Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide 
+and this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
 ```
 
 Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
 
-```
-Now deploy Firebase Data Connect operations.
-Debug any issues in  .gql files.
-Please use this doc as guidance 
-for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc 
-for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
-```
 
 ### Step 7: Authentication
 Now that Firebase Data Connect is working, ask:
