@@ -71,25 +71,24 @@ You should see Firebase MCP server tools triggered and your project and web app 
 ### Step 3: Billing Upgrade
 Go to the console and update your billing plan.
 
-### Step 4: Schema 
-Your AI assistant should automatically create schema in your `schema.gql` file. If not, ask:
+### Step 4: Schema and Operations
+Your AI assistant should automatically create a schema in your `schema.gql` file. If not, ask:
 
 ```
 Help me generate the schema for this app under schema.gql file 
 and make sure to use MCP tool
 ```
 
-If there's no error in the schema, query and mutation.gql files, AI assistant should be able to run Firebase deploy successfully, and if there's any error, you can ask your AI assistant:
+If there are no errors in the schema, query, and mutation.gql files, your AI assistant should be able to run Firebase deploy successfully. If there are any errors, ask your AI assistant:
 
 ```
 run firebase deploy --dry-run.
 Debug any issues in  .gql files.
-Please use this doc as guidance 
-for schema: https://firebase.google.com/docs/data-connect/schemas-guide and this doc 
-for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
+Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide and https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt.
+Use this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
 ```
 
-It will compiles the graghQL locally and report any errors for AI assistant to fix. 
+This will compile the GraphQL locally and report any errors for your AI assistant to fix. 
 
 ### Step 5: Database Provision
 Once your AI assistant fixed all issues, ask:
@@ -98,29 +97,29 @@ Once your AI assistant fixed all issues, ask:
 Now deploy Firebase Data Connect schema.
 ```
 
-Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL console at https://console.cloud.google.com/sql/
+Make sure to acknowledge the changes in the database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which will provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL console at https://console.cloud.google.com/sql/
 
-### Step 6: Ensure Read and Write Operations Work
+### Step 6: Ensure Your Database Read and Write Work
 Ask your AI assistant:
 
 ```
-Now desgin queries to communicate with database in query.gql and mutation.gql files and
-make sure to use MCP server tool to do this
+Now design queries to communicate with the database in query.gql and mutation.gql files and
+make sure to use MCP server tool to do this.
 Then generate SDKs and use them in the app.
 Once you are ready, deploy Firebase Data Connect operations.
-
 ```
 
-If there's any errors blocking the deploy, ask your AI assistant:
+If there are any errors blocking the deploy, ask your AI assistant:
 
 ```
 run firebase deploy --dry-run.
 Debug any issues in  .gql files.
-Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide 
-and this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
+Please use this doc as guidance for schema: https://firebase.google.com/docs/data-connect/schemas-guide, and https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt.
+
+Use this doc for query and mutation: https://raw.githubusercontent.com/firebase/firebase-tools/refs/heads/master/templates/dataconnect-prompts/operation-generation-cursor-windsurf-rule.txt. 
 ```
 
-Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
+Your AI assistant will learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
 
 ### Step 7: Authentication
 Now that Firebase Data Connect is working, ask:
@@ -135,11 +134,11 @@ Go to console and enable Email/Password and Google Sign-in.
 Ask your AI assistant:
 
 ```
-Can you setup Firebase Hosting and deploy the app to production 🚀? 
-Make sure we hide all the API keys before deploy to GitHub
+Can you set up Firebase Hosting and deploy the app to production 🚀? 
+Make sure we hide all the API keys before deploying to GitHub
 ```
 
-If unsure which framework Firebase Hosting is asking, ask your AI assistant which framework is used in this app.
+If you're unsure which framework Firebase Hosting is asking about, ask your AI assistant which framework is used in this app.
 
 ### Step 9: (Optional) Commit to GitHub
 Ask your AI assistant:
