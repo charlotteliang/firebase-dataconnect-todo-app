@@ -71,7 +71,7 @@ You should see Firebase MCP server tools triggered and your project and web app 
 ### Step 3: Billing Upgrade
 Go to the console and update your billing plan.
 
-### Step 4: Schema and Operations
+### Step 4: Schema 
 Your AI assistant should automatically create schema in your `schema.gql` file. If not, ask:
 
 ```
@@ -100,7 +100,7 @@ Now deploy Firebase Data Connect schema.
 
 Make sure to acknowledge the changes in database in the CLI tool. Your AI assistant should kick off Firebase CLI to deploy, which would provision a Cloud SQL database that might take 15 minutes. You can confirm on the console and check the Cloud SQL console at https://console.cloud.google.com/sql/
 
-### Step 6: Ensure Read and Write Works
+### Step 6: Ensure Read and Write Operations Work
 Ask your AI assistant:
 
 ```
@@ -121,7 +121,6 @@ and this doc for query and mutation: https://raw.githubusercontent.com/firebase/
 ```
 
 Your AI assistant would learn the generated SDK and how to use it. Try adding a few todo items and see if they show up on the Data Connect console.
-
 
 ### Step 7: Authentication
 Now that Firebase Data Connect is working, ask:
