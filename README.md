@@ -2,8 +2,6 @@
 
 A modern React-based todo application showcasing Firebase Data Connect integration with user authentication, real-time data synchronization, and an innovative SQL Editor.
 
-🌐 **Live Demo**: [https://todo-app-dataconnect-2024.web.app](https://todo-app-dataconnect-2024.web.app)
-
 ## Features
 
 - 🔐 **User Authentication** - Secure login/logout with Firebase Auth
@@ -57,6 +55,15 @@ Make me a todo app
 ```
 
 ### Step 2: Firebase Initialization
+
+**First, setup the Firebase MCP server:**
+Ask your AI assistant:
+
+```
+Setup Firebase MCP server based on this doc: https://firebase.google.com/docs/cli/mcp-server#before-you-begin
+```
+
+**Then, create your Firebase project:**
 Ask your AI assistant:
 
 ```
