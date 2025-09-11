@@ -30,15 +30,6 @@ Before you begin, ensure you have:
 - A Google Cloud Platform account
 - Git installed (optional)
 
-### Setup Firebase MCP Server
-Ask your AI assistant:
-
-```
-Setup Firebase MCP server based on this doc: https://firebase.google.com/docs/cli/mcp-server#before-you-begin
-```
-
-This will automatically install Node.js and Firebase CLI if needed.
-
 ## AI Prompts
 
 ### Setup Firebase Data Connect
@@ -62,6 +53,7 @@ Ask your AI assistant:
 ```
 Setup Firebase MCP server based on this doc: https://firebase.google.com/docs/cli/mcp-server#before-you-begin
 ```
+This will automatically install Node.js and Firebase CLI if needed.
 
 **Then, create your Firebase project:**
 Ask your AI assistant:
