@@ -30,6 +30,20 @@ Before you begin, ensure you have:
 - A Google Cloud Platform account
 - Git installed (optional)
 
+## 🚀 Quick Start with Cursor Rules
+
+**For AI-assisted setup using Cursor, follow our comprehensive Cursor rules:**
+
+📋 **[FIREBASE_SETUP.md](./FIREBASE_SETUP.md) - Complete Cursor Rules for Firebase Data Connect Setup**
+
+This file contains detailed Cursor rules that guide AI assistants through the entire Firebase Data Connect setup process, including:
+- MCP server configuration
+- Firebase project creation
+- Schema generation and validation
+- Authentication integration
+- Hosting deployment
+- Security best practices
+
 ## AI Prompts
 
 ### Setup Firebase Data Connect
@@ -154,6 +168,8 @@ For admin users, you can build a separate SQL dashboard app using the Firebase D
 
 ### 📋 Manual Setup Alternative
 For traditional manual setup without AI assistance, see our detailed [Firebase Setup Guide](FIREBASE_SETUP.md).
+
+**💡 Recommended: Use the Cursor Rules approach above for the best AI-assisted experience!**
 
 ## Installation & Setup
 
