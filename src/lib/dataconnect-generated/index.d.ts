@@ -8,6 +8,8 @@ export type Int64String = string;
 export type DateString = string;
 
 
+
+
 export interface AddTodoData {
   todo_insert: Todo_Key;
 }
@@ -89,6 +91,30 @@ export interface User_Key {
   __typename?: 'User_Key';
 }
 
+interface GetMyTodosRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetMyTodosData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetMyTodosData, undefined>;
+  operationName: string;
+}
+export const getMyTodosRef: GetMyTodosRef;
+
+export function getMyTodos(): QueryPromise<GetMyTodosData, undefined>;
+export function getMyTodos(dc: DataConnect): QueryPromise<GetMyTodosData, undefined>;
+
+interface GetTodoByIdRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetTodoByIdVariables): QueryRef<GetTodoByIdData, GetTodoByIdVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetTodoByIdVariables): QueryRef<GetTodoByIdData, GetTodoByIdVariables>;
+  operationName: string;
+}
+export const getTodoByIdRef: GetTodoByIdRef;
+
+export function getTodoById(vars: GetTodoByIdVariables): QueryPromise<GetTodoByIdData, GetTodoByIdVariables>;
+export function getTodoById(dc: DataConnect, vars: GetTodoByIdVariables): QueryPromise<GetTodoByIdData, GetTodoByIdVariables>;
+
 interface UpsertUserRef {
   /* Allow users to create refs without passing in DataConnect */
   (vars?: UpsertUserVariables): MutationRef<UpsertUserData, UpsertUserVariables>;
@@ -148,28 +174,4 @@ export const deleteTodoRef: DeleteTodoRef;
 
 export function deleteTodo(vars: DeleteTodoVariables): MutationPromise<DeleteTodoData, DeleteTodoVariables>;
 export function deleteTodo(dc: DataConnect, vars: DeleteTodoVariables): MutationPromise<DeleteTodoData, DeleteTodoVariables>;
-
-interface GetMyTodosRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<GetMyTodosData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<GetMyTodosData, undefined>;
-  operationName: string;
-}
-export const getMyTodosRef: GetMyTodosRef;
-
-export function getMyTodos(): QueryPromise<GetMyTodosData, undefined>;
-export function getMyTodos(dc: DataConnect): QueryPromise<GetMyTodosData, undefined>;
-
-interface GetTodoByIdRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetTodoByIdVariables): QueryRef<GetTodoByIdData, GetTodoByIdVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetTodoByIdVariables): QueryRef<GetTodoByIdData, GetTodoByIdVariables>;
-  operationName: string;
-}
-export const getTodoByIdRef: GetTodoByIdRef;
-
-export function getTodoById(vars: GetTodoByIdVariables): QueryPromise<GetTodoByIdData, GetTodoByIdVariables>;
-export function getTodoById(dc: DataConnect, vars: GetTodoByIdVariables): QueryPromise<GetTodoByIdData, GetTodoByIdVariables>;
 

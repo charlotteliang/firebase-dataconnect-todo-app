@@ -6,6 +6,28 @@ export const connectorConfig = {
   location: 'us-central1'
 };
 
+export const getMyTodosRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetMyTodos');
+}
+getMyTodosRef.operationName = 'GetMyTodos';
+
+export function getMyTodos(dc) {
+  return executeQuery(getMyTodosRef(dc));
+}
+
+export const getTodoByIdRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetTodoById', inputVars);
+}
+getTodoByIdRef.operationName = 'GetTodoById';
+
+export function getTodoById(dcOrVars, vars) {
+  return executeQuery(getTodoByIdRef(dcOrVars, vars));
+}
+
 export const upsertUserRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
   dcInstance._useGeneratedSdk();
@@ -59,27 +81,5 @@ deleteTodoRef.operationName = 'DeleteTodo';
 
 export function deleteTodo(dcOrVars, vars) {
   return executeMutation(deleteTodoRef(dcOrVars, vars));
-}
-
-export const getMyTodosRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetMyTodos');
-}
-getMyTodosRef.operationName = 'GetMyTodos';
-
-export function getMyTodos(dc) {
-  return executeQuery(getMyTodosRef(dc));
-}
-
-export const getTodoByIdRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetTodoById', inputVars);
-}
-getTodoByIdRef.operationName = 'GetTodoById';
-
-export function getTodoById(dcOrVars, vars) {
-  return executeQuery(getTodoByIdRef(dcOrVars, vars));
 }
 

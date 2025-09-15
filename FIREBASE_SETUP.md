@@ -22,8 +22,8 @@ When user asks to set up Firebase Data Connect:
 ### Step 2: Firebase Project Creation
 - Create a new Firebase project and web app using MCP server tools
 - **Do not ask developers to go to console** - handle this automatically
-- Use environment variables for all Firebase configuration
 - **Never hardcode API keys** in the source code
+- For web, make sure `firebaseConfig` (containing apiKey) is in `.env` or its own JS file and add that to `.gitignore`. For mobile, make sure to add google-services.json and GoogleService-Info.plist to `.gitignore`. 
 
 **For Existing Firebase Project:**
 - Ask developer for their Firebase Project ID or App ID

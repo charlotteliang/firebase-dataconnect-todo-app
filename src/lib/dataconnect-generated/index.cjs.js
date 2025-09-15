@@ -7,6 +7,30 @@ const connectorConfig = {
 };
 exports.connectorConfig = connectorConfig;
 
+const getMyTodosRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetMyTodos');
+}
+getMyTodosRef.operationName = 'GetMyTodos';
+exports.getMyTodosRef = getMyTodosRef;
+
+exports.getMyTodos = function getMyTodos(dc) {
+  return executeQuery(getMyTodosRef(dc));
+};
+
+const getTodoByIdRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return queryRef(dcInstance, 'GetTodoById', inputVars);
+}
+getTodoByIdRef.operationName = 'GetTodoById';
+exports.getTodoByIdRef = getTodoByIdRef;
+
+exports.getTodoById = function getTodoById(dcOrVars, vars) {
+  return executeQuery(getTodoByIdRef(dcOrVars, vars));
+};
+
 const upsertUserRef = (dcOrVars, vars) => {
   const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
   dcInstance._useGeneratedSdk();
@@ -65,28 +89,4 @@ exports.deleteTodoRef = deleteTodoRef;
 
 exports.deleteTodo = function deleteTodo(dcOrVars, vars) {
   return executeMutation(deleteTodoRef(dcOrVars, vars));
-};
-
-const getMyTodosRef = (dc) => {
-  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetMyTodos');
-}
-getMyTodosRef.operationName = 'GetMyTodos';
-exports.getMyTodosRef = getMyTodosRef;
-
-exports.getMyTodos = function getMyTodos(dc) {
-  return executeQuery(getMyTodosRef(dc));
-};
-
-const getTodoByIdRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
-  dcInstance._useGeneratedSdk();
-  return queryRef(dcInstance, 'GetTodoById', inputVars);
-}
-getTodoByIdRef.operationName = 'GetTodoById';
-exports.getTodoByIdRef = getTodoByIdRef;
-
-exports.getTodoById = function getTodoById(dcOrVars, vars) {
-  return executeQuery(getTodoByIdRef(dcOrVars, vars));
 };
