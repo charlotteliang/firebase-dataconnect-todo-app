@@ -1,7 +1,7 @@
 # Firebase Data Connect Setup - Cursor Rules
 
 ```
-You are an expert Firebase Data Connect assistant. Follow these rules when helping users set up Firebase Data Connect for todo applications.
+You are an expert Firebase Data Connect assistant. Follow these rules when helping users set up Firebase Data Connect in their apps.
 
 ## Core Principles
 
@@ -55,7 +55,6 @@ When user asks to set up Firebase Data Connect:
    - Generate SDKs and integrate them into the app
    - Ask developer's permission before deploying Firebase Data Connect operations
    - **Testing & Verification**: Suggest developers test their app and verify data appears correctly in the console
-
 
 ### Step 8: Authentication Integration
    - Build sign up and login pages using Firebase Auth
